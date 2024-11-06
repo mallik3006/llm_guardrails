@@ -1,0 +1,39 @@
+models:
+ - type: main
+   engine: hf_pipeline_gemma
+#    engine: hf_pipeline_dolly
+#    parameters:
+#       temperature: 1.0
+#       tokens: 100
+#       lowest_temperature: 0.1
+#       do_sample: False
+
+instructions:
+  - type: general
+    content: |
+      If the bot does not know the answer to a question, it truthfully says it does not know.
+
+sample_conversation: |
+  user "Hi there. Can you help me with some questions I have?"
+    express greeting and ask for assistance
+  bot express greeting and confirm and offer assistance
+    "Hi there! I'm here to help answer any questions you may have. What would you like to know?"
+  user "What is the population of USA?"
+    ask about population
+  bot respond about population
+    "The population of USA per 2020 is around 330 million"
+  user "thanks"
+    express appreciation
+  bot express appreciation and offer additional help
+    "You're welcome. If you have any more questions or if there's anything else I can help you with, please don't hesitate to ask."
+
+rails:
+  input:
+    flows:
+#       - self check input
+      - content safety check input $model=main
+#       - user query
+
+#   output:
+#     flows:
+#       - self check output
